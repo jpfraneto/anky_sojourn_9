@@ -1,0 +1,14 @@
+{
+  "document": "SOJOURN_9",
+  "schema_version": 2,
+  "records": [
+    {
+      "label": "repo-source",
+      "path": "constitution/SOJOURN_9.md",
+      "sha256": "fdcda4c456dd5b31b66002446c4211bb64763beb22678a64750fbd08e97dbf75",
+      "arweave_uri": null,
+      "effective_at": "2026-04-21",
+      "notes": "Operative constitutional source text in the repo. No immutable snapshot or Arweave upload has been recorded yet."
+    }
+  ]
+}

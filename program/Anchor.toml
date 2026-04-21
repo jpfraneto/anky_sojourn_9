@@ -1,0 +1,17 @@
+[toolchain]
+package_manager = "npm"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+sojourn_9 = "2VfB7nvV2SZuCpK2DurRgJLfw57TCt2g9VJXACo5h8aK"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test --manifest-path Cargo.toml --package sojourn_9"
+

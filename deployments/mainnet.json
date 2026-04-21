@@ -1,0 +1,10 @@
+{
+  "cluster": "mainnet-beta",
+  "program_id": null,
+  "upgrade_authority": null,
+  "idl_path": null,
+  "constitution_ref": "constitution/SOJOURN_9.md",
+  "constitution_sha256": "fdcda4c456dd5b31b66002446c4211bb64763beb22678a64750fbd08e97dbf75",
+  "constitution_arweave_uri": null,
+  "notes": "Deployment manifest placeholder. Until immutable releases exist, point this manifest at the operative repo constitution by path and hash."
+}

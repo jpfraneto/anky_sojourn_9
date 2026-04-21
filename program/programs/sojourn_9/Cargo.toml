@@ -1,0 +1,21 @@
+[package]
+name = "sojourn_9"
+version = "0.1.0"
+description = "Public proof program for SOJOURN 9"
+edition.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "sojourn_9"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+
+[dependencies]
+anchor-lang.workspace = true

@@ -1,0 +1,10 @@
+node_modules/
+clients/ts-sdk/dist/
+program/target/
+program/.anchor/
+program/test-ledger/
+.DS_Store
+*.log
+*.swp
+*.swo
+

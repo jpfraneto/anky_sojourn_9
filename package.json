@@ -1,0 +1,19 @@
+{
+  "name": "sojourn9",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Constitution and public-proof repository for SOJOURN 9",
+  "scripts": {
+    "build": "npm run build:program && npm run build:sdk",
+    "build:program": "cd program && anchor build",
+    "build:sdk": "tsc -p clients/ts-sdk/tsconfig.json",
+    "test": "cargo test --manifest-path program/Cargo.toml --package sojourn_9",
+    "anchor:test": "cd program && anchor test",
+    "fmt": "cargo fmt --manifest-path program/Cargo.toml --all",
+    "lint": "cargo clippy --manifest-path program/Cargo.toml --all-targets -- -D warnings",
+    "idl:sync": "./scripts/sync-idl.sh"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
