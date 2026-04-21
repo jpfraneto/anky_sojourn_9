@@ -5,6 +5,16 @@ package_manager = "npm"
 resolution = true
 skip-lint = false
 
+[test]
+startup_wait = 10000
+
+[test.validator]
+bind_address = "127.0.0.1"
+rpc_port = 8898
+faucet_port = 9901
+gossip_port = 8001
+dynamic_port_range = "8900-8950"
+
 [programs.localnet]
 sojourn_9 = "2VfB7nvV2SZuCpK2DurRgJLfw57TCt2g9VJXACo5h8aK"
 
@@ -14,4 +24,3 @@ wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "cargo test --manifest-path Cargo.toml --package sojourn_9"
-
