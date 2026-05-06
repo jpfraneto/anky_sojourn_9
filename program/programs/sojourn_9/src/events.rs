@@ -15,11 +15,14 @@ pub struct SeasonInitialized {
 
 #[event]
 pub struct AnkySealed {
+    pub daily_seal: Pubkey,
     pub season_config: Pubkey,
-    pub vessel_asset_id: Pubkey,
+    /// Transitional V1 field name retained until claim state exists.
+    pub selected_vessel_asset_id: Pubkey,
     pub utc_day: i64,
     pub chamber_index: u16,
-    pub steward: Pubkey,
+    pub current_steward: Pubkey,
+    pub anky_hash_commitment: [u8; 32],
     pub reward_eligible: bool,
 }
 

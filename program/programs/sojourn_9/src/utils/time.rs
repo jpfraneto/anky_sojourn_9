@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 use crate::{
-    constants::{CHAMBER_COUNT, CHAMBERS_PER_REGION, UTC_DAY_SECONDS},
+    constants::{CHAMBERS_PER_REGION, CHAMBER_COUNT, UTC_DAY_SECONDS},
     errors::Sojourn9Error,
 };
 

@@ -1,58 +1,52 @@
-# Sojourn 9 Decision Log
+# Sojourn 9 Decisions
 
-This file records implementation-facing decisions derived from `constitution/SOJOURN_9.md`.
+This file records implementation-facing invariants derived from `constitution/SOJOURN_9.md`.
 
-If any entry here conflicts with the constitution, the constitution wins.
+If any item here conflicts with the constitution, the constitution wins.
 
-## D-000: Operative Constitutional Source
+## D-001 Operative Source
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: `constitution/SOJOURN_9.md` is the operative constitutional source text for this repository until immutable snapshots are cut.
-- Rationale: The repo scaffold, manifests, and code comments should derive from the constitutional text itself rather than from the earlier scaffold prompt.
+- `constitution/SOJOURN_9.md` is the operative constitutional source text in this repo.
 
-## D-001: Season Shape Is Constitutional
+## D-002 Season Shape
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: Sojourn 9 contains exactly 96 chambers, 12 regions of 8 chambers each, and 3,456 canonical vessels.
-- Rationale: These are season-defining constants, not tuning knobs for clients or deployments.
+- Sojourn 9 contains 96 chambers, 12 regions of 8 chambers each, and 3,456 canonical vessels.
+- The canonical day is UTC.
+- A vessel may seal at most once per UTC day, and only the current chamber may be sealed.
 
-## D-002: The Canonical Entrance Is The iOS Chamber Flow
+## D-003 Canonical Entry
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: The iOS app is the canonical entrance and today's chamber is the canonical first action.
-- Rationale: The repo may support public proof and secondary integrations, but it should not speak as if the season were centered on generic clients, feeds, or auxiliary surfaces.
+- The iOS app is the canonical entrance.
+- While supply remains, the app invites an unclaimed wallet to claim its vessel through a deliberate action.
+- After claim, today’s chamber is the first recurring action.
+- The season is designed as continuity, not episodic engagement.
 
-## D-003: One Vessel-Based Seal Right Per UTC Day
+## D-004 Stewardship Law
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: A vessel may seal at most one Anky per UTC day, and only the current chamber may be sealed.
-- Rationale: The daily right belongs to the vessel itself and moves forward one chamber at a time.
+- Each valid vessel is a soulbound cNFT in the canonical Sojourn 9 collection.
+- A wallet may steward at most one valid vessel in the season.
+- Once claimed, a vessel remains bound to its claiming wallet for the duration of the season.
+- The canonical surface should not introduce selected-vessel ambiguity.
 
-## D-004: Transfer Preserves Unused Rights But Not Duplicate Rights
+## D-005 Seal And Privacy Law
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: If a vessel is transferred before its seal right is used on a given UTC day, the new steward may still use that day's right.
-- Decision: If the vessel has already been used that day, transfer does not create a second daily right.
-- Rationale: The right attaches to vessel-day state, not to a prior steward or wallet moment.
+- The writer’s device computes a hash from the exact raw `.anky` string.
+- The program receives only that hash commitment, not plaintext `.anky`.
+- The chain records commitment, not content.
+- The rite is private and the proof is public.
+- The chain exists to verify commitment and stewardship, not to expose writing.
+- Vessel history and writer history remain distinct.
+- Reward follows the valid seal, not mere possession.
 
-## D-005: Public Proof Must Respect Privacy And Memory Separation
+## D-006 Current Program Surface
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: Private written content remains offchain and does not transfer with the vessel.
-- Decision: The public proof layer should store only minimum proof for seal validity, timing, stewardship at seal time, chamber/day identity, and reward eligibility.
-- Decision: Vessel history and writer history must remain distinct.
-- Rationale: The protocol should preserve the visible path of the vessel without pretending to custody the writer's inner archive.
+- The current implemented surface is `initialize_season`, `seal_anky`, and scaffolded `claim_reward`.
+- `initialize_season` commits season constants and the constitutional hash.
+- `seal_anky` performs UTC day derivation, chamber derivation, Bubblegum collection-membership verification, current-steward verification, creation of vessel-day `DailySeal`, and emission of `AnkySealed`.
+- Live V1 still uses `selected_vessel_asset_id` and a vessel-keyed PDA.
+- That V1 shape remains transitional until `claim_vessel` exists.
 
-## D-006: Reward Follows The Valid Seal
+## D-007 Repo Framing
 
-- Status: `accepted`
-- Date: `2026-04-21`
-- Decision: Reward eligibility follows a valid seal event, not mere vessel possession.
-- Decision: A reward earned by a valid seal remains attached to the steward who sealed, even if the vessel is later transferred.
-- Rationale: Incentives should reinforce the rite without making later ownership look like retroactive authorship.
+- Repo-facing documents must keep the distinction between rite, proof, and implementation clear.
+- Repo-facing documents must not frame Sojourn 9 as a general journaling app, an open social writing feed, an NFT marketplace-first surface, a speculation-first system, a protocol for publishing raw writing onchain, or a broad AI writing assistant at the protocol layer.

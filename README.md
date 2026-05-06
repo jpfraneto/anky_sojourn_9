@@ -1,50 +1,83 @@
 # SOJOURN 9
 
-SOJOURN 9 is the ninth canonical season of Anky: a 96-chamber writing pilgrimage crossed through the iOS app, one UTC day at a time, by 3,456 canonical vessels on Solana.
+SOJOURN 9 is a finite daily rite of return.
 
-`constitution/SOJOURN_9.md` is the operative source of truth in this repository. The code and metadata here exist to preserve the public proof layer that the constitution requires. They are not the rite itself, and they do not outrank the constitutional text.
+It is a 96-day writing pilgrimage divided into 12 regions of 8 days, entered through the iOS app, and bounded by exactly 3,456 vessels. Each vessel is a soulbound cNFT. One wallet may steward at most one vessel.
 
-## Constitutional Baseline
+**The rite is private. The proof is public. The crossing is daily.**
 
-- the iOS app is the canonical entrance
-- today's chamber is the canonical first action
-- the season contains 96 chambers arranged as 12 regions of 8 chambers each
-- each vessel may seal at most one Anky per UTC day
-- the seal right lives in the vessel and follows current stewardship
-- private `.anky` writing and reflected `.anky` stay offchain and do not transfer with the vessel
-- reward follows the valid seal, not later vessel possession
+This repo is the constitutional and public-proof seed of Sojourn 9. `constitution/SOJOURN_9.md` is the operative source of truth.
 
-## Canonical Vs. Implementation-Specific
+## Canonical Human Act
 
-Canonical material in this repository includes the constitutional text, the decision log derived from it, the constitutional changelog, deployment manifests that point back to the active constitutional source, and artifact records for immutable uploads once they exist.
+1. Claim vessel through the iOS app while supply remains.
+2. Write one raw `.anky`.
+3. Compute the hash on device.
+4. Seal the commitment onchain.
+5. Continue the crossing.
 
-Implementation-specific material includes the Anchor workspace, Rust modules, SDK helpers, and developer tooling. These should preserve constitutional law without confusing implementation detail for the canonical surface.
+## Rite, Proof, Implementation
 
-## Repository Layout
+- `Rite`: the lived daily act of claim, writing, sealing, return, and continuity across 96 days.
+- `Proof`: the public commitment layer that verifies stewardship and chamber closure without exposing the writing.
+- `Implementation`: the current code embodiment in this repo.
 
-```text
-constitution/   Constitutional text, derivative decision records, changelog, and snapshot notes
-program/        Anchor workspace and the Sojourn 9 public proof program
-idl/            Reviewed public IDL snapshots and release notes
-clients/        Support SDK and app-surface notes for non-constitutional implementation work
-deployments/    Devnet and mainnet deployment manifests keyed to the active constitution
-artifacts/      Artifact references such as Arweave mappings for immutable constitutional copies
-docs/           Public-proof design notes and implementation planning
-scripts/        Small developer utilities
-```
+## Non-goals
+
+- a general journaling app
+- an open social writing feed
+- an NFT marketplace-first system
+- a speculation-first system
+- a protocol for publishing raw writing onchain
+- a broad AI writing assistant at the protocol layer
+
+## Repository
+
+- `constitution/`: the law of the season
+- `docs/`: the engineering interpretation of the law
+- `program/`: the Anchor workspace and Solana program scaffold
+- `clients/`: notes and placeholder surfaces, not a full client
+- `deployments/`, `artifacts/`, `idl/`: placeholder and manifest layers
+
+## Current Surface
+
+- the implemented program surface is `initialize_season`, `seal_anky`, and scaffolded `claim_reward`
+- `initialize_season` commits season constants and the constitutional hash
+- `seal_anky` performs UTC day derivation, chamber derivation, Bubblegum collection-membership verification, current-steward verification, creation of vessel-day `DailySeal`, and emission of `AnkySealed`
+- the chain records commitment, not content
+- raw `.anky`, reflected `.anky`, and private archive remain offchain
+
+## Current Limitation
+
+- live V1 still uses `selected_vessel_asset_id`
+- live V1 still uses a vessel-keyed PDA
+- this remains transitional until `claim_vessel` exists
+
+## Not Yet Implemented
+
+- no implemented `claim_vessel`
+- no implemented `mint_vessel`
+- no onchain 3,456 supply tracking yet
+- no one-wallet-per-vessel enforcement record yet
+- `claim_reward` is still scaffold / TODO
+- no reviewed committed IDL
+- no published program IDs
+- no immutable Arweave snapshot yet
+- no actual iOS app code in this repo
+- the TS SDK remains a placeholder / helper surface
+
+## Minimum Path To First True Ship
+
+- [ ] implement `claim_vessel`
+- [ ] enforce the `3,456` hard cap onchain
+- [ ] enforce one-wallet / one-vessel stewardship
+- [ ] finalize the canonical seal path
+- [ ] commit a reviewed public IDL
+- [ ] publish program IDs
+- [ ] prove the full devnet flow end-to-end
+- [ ] align the iOS client to the canonical human act
 
 ## Local Development
-
-Tooling currently installed on this machine:
-
-- `anchor-cli 0.31.1`
-- `rustc 1.93.0`
-- `cargo 1.93.0`
-- `solana-cli 3.1.12`
-- `node v22.22.0`
-- `npm 10.9.4`
-
-Quickstart:
 
 ```bash
 npm install
@@ -60,26 +93,3 @@ npm run fmt
 npm run lint
 npm run idl:sync
 ```
-
-## Current Implementation Surface
-
-The constitutional text is complete enough to govern the scaffold, but the protocol implementation is still early.
-
-Present in the repository:
-
-- the operative constitutional text plus aligned decision and changelog records
-- an Anchor workspace with season, vessel-day seal, and reward-claim account scaffolding
-- deployment and artifact manifests that point to the active constitutional source by path and hash
-- a TypeScript support package with constitutional constants and UTC/chamber helpers
-
-Still open:
-
-- cNFT ownership verification and transfer-aware seal enforcement
-- canonical vessel collection or registry proof logic
-- reward pool accounting, rollover treatment, and anti-replay claim enforcement
-- reviewed public IDL snapshots committed under `idl/`
-- deployed program IDs and immutable Arweave uploads
-
-## Onchain Data Boundary
-
-The Solana program is intended to store only minimum public truth: vessel identity, season identity, chamber/day identity, seal timing, steward-at-seal, and reward eligibility. The written `.anky`, the reflected `.anky`, and the writer's private archive remain offchain.

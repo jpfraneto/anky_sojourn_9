@@ -22,9 +22,9 @@ pub fn handler(_ctx: Context<ClaimReward>, _args: ClaimRewardArgs) -> Result<()>
 
     - define what reward asset or accounting primitive is being claimed
     - require the referenced DailySeal to be reward-eligible
-    - bind settlement to the steward who earned the reward at seal time
+    - bind settlement to DailySeal.current_steward, the steward who earned the reward at seal time
     - create or validate a claim receipt account so claims cannot be replayed
-    - make sure later vessel transfers do not move already-earned rewards
+    - keep reward settlement tied to the earning seal rather than to later possession state
     - emit RewardClaimed when reward settlement is recorded
     */
     err!(Sojourn9Error::UnimplementedInstruction)

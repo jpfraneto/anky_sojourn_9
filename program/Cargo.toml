@@ -10,7 +10,10 @@ license = "Apache-2.0"
 
 [workspace.dependencies]
 anchor-lang = { version = "0.31.1", features = ["init-if-needed"] }
+bytemuck = "1.13.1"
+mpl-bubblegum = "2.1.1"
+spl-concurrent-merkle-tree = "1.0.0"
+spl-merkle-tree-reference = "1.0.0"
 
 [profile.release]
 overflow-checks = true
-

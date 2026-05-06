@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 use crate::{
     constants::{
-        CANONICAL_VESSEL_COUNT, CHAMBER_COUNT, CHAMBERS_PER_REGION, REGION_COUNT, SEASON_SEED,
+        CANONICAL_VESSEL_COUNT, CHAMBERS_PER_REGION, CHAMBER_COUNT, REGION_COUNT, SEASON_SEED,
         SOJOURN_NUMBER, UTC_DAY_SECONDS,
     },
     errors::Sojourn9Error,

@@ -20,13 +20,74 @@ export interface SeasonConfigSnapshot {
   constitutionHashHex: string;
 }
 
+/**
+ * V1 mirrors the current onchain field name.
+ * Under the soulbound season model, this should be the wallet's single claimed vessel.
+ */
 export interface DailySealRecord {
-  vesselAssetId: string;
+  selectedVesselAssetId: string;
   utcDay: number;
   chamberIndex: number;
-  steward: string;
+  currentSteward: string;
+  ankyHashCommitmentHex: string;
   sealedAtUnixTs: number;
   rewardEligible: boolean;
+}
+
+export interface VesselCollection {
+  verified: boolean;
+  key: string;
+}
+
+export type SelectedVesselCollection = VesselCollection;
+
+export interface VesselCreator {
+  address: string;
+  verified: boolean;
+  share: number;
+}
+
+export type SelectedVesselCreator = VesselCreator;
+
+export interface VesselMetadata {
+  name: string;
+  symbol: string;
+  uri: string;
+  sellerFeeBasisPoints: number;
+  primarySaleHappened: boolean;
+  isMutable: boolean;
+  editionNonce: number | null;
+  tokenStandard:
+    | "NonFungible"
+    | "FungibleAsset"
+    | "Fungible"
+    | "NonFungibleEdition"
+    | null;
+  collection: VesselCollection | null;
+  tokenProgramVersion: "Original" | "Token2022";
+  creators: VesselCreator[];
+}
+
+export type SelectedVesselMetadata = VesselMetadata;
+
+export interface VesselProof {
+  merkleRootHex: string;
+  nonce: number;
+  index: number;
+  owner: string;
+  delegate: string;
+  metadata: VesselMetadata;
+}
+
+export type SelectedVesselProof = VesselProof;
+
+export interface SealAnkyV1Args {
+  /**
+   * Transitional V1 argument name retained for compatibility with the current instruction shape.
+   */
+  selectedVesselAssetId: string;
+  ankyHashCommitmentHex: string;
+  selectedVesselProof: VesselProof;
 }
 
 export function deriveUtcDay(unixTimestamp: number): number {
